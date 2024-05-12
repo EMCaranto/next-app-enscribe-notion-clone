@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google';
 
 import type { Metadata } from 'next';
 
+import '@/stylesheets/main.css';
 import '@/stylesheets/globals.css';
 
 const app_font = Inter({
