@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 
 export const Heading = () => {
   return (
-    <div className="max-w-3xl space-y-4">
+    <div className="max-w-3xl space-y-4 py-4">
       <h1 className="text-3xl font-bold sm:text-4xl md:text-5xl lg:text-6xl">
         <span className="leading-tight">
           Your Ideas, Documents, & Plans. Unified. Welcome to{' '}
