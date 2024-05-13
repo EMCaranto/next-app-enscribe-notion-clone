@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import { Logo } from './logo';
+import { ThemeToggler } from '@/components/shared/theme-toggler';
 import { Button } from '@/components/ui/button';
 
 import { useScroll } from '@/hooks/useScroll';
@@ -25,7 +26,7 @@ export const Navbar = () => {
         <Button size={'sm'} variant={'outline'}>
           Join Enscribe
         </Button>
-        <span>Theme Toggler</span>
+        <ThemeToggler />
       </div>
     </nav>
   );
