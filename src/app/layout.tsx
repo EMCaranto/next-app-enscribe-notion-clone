@@ -2,6 +2,8 @@ import { Inter } from 'next/font/google';
 
 import type { Metadata } from 'next';
 
+import { ThemeProvider } from '@/components/providers/theme-provider';
+
 import '@/stylesheets/main.css';
 import '@/stylesheets/globals.css';
 
@@ -34,9 +36,11 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={app_font.className}>
-        <>{children}</>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
