@@ -18,7 +18,7 @@ export const Navbar = () => {
     <nav
       className={cn(
         'fixed top-0 z-50 flex w-full items-center bg-neutral-50 px-6 py-4 dark:bg-neutral-950',
-        scrolled && 'shadow'
+        scrolled && 'shadow dark:shadow-neutral-900'
       )}
     >
       <Logo />
