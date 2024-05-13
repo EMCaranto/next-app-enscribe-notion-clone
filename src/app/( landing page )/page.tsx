@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Footer } from './_components/footer';
 import { Heading } from './_components/heading';
 import { Hero } from './_components/hero';
 
@@ -10,7 +11,7 @@ export default function LandingPage() {
         <Heading />
         <Hero />
       </div>
-      {/** Footer */}
+      <Footer />
     </div>
   );
 }
