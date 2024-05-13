@@ -9,3 +9,19 @@ body {
 html {
   height: 100%;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-neutral-950/25 dark:bg-neutral-50/25;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded bg-neutral-950/50 dark:bg-neutral-50/50;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-neutral-950/80 dark:bg-neutral-50/80;
+}
