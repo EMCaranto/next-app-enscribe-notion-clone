@@ -21,7 +21,7 @@ export const Logo = () => {
         height={48}
         width={48}
       />
-      <span className="text-xl font-bold">Enscribe</span>
+      <span className="text-lg font-semibold tracking-wide">Enscribe</span>
     </div>
   );
 };
