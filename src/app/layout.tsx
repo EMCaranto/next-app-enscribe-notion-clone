@@ -2,7 +2,8 @@ import { Inter } from 'next/font/google';
 
 import type { Metadata } from 'next';
 
-import { ThemeProvider } from '@/components/providers/theme-provider';
+import { ConvexClientProvider } from '@/providers/convex-provider';
+import { ThemeProvider } from '@/providers/theme-provider';
 
 import '@/stylesheets/main.css';
 import '@/stylesheets/globals.css';
@@ -36,12 +37,14 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={app_font.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
+    <ConvexClientProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className={app_font.className}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </ConvexClientProvider>
   );
 }
