@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import { MoonIcon, SunIcon, SunMoonIcon } from 'lucide-react';
+import { MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 import { Button } from '@/components/ui/button';
