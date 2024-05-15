@@ -17,7 +17,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   if (isLoading) {
     return (
-      <div className="flex h-full w-full items-center justify-center">
+      <div className="flex h-full items-center justify-center">
         <LoadingSpinner size={'lg'} />
       </div>
     );
@@ -28,9 +28,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   }
 
   return (
-    <div className="flex h-full w-full bg-red-300 dark:bg-red-500">
+    <div className="flex h-full bg-neutral-50 dark:bg-neutral-950">
       <Sidebar />
-      <div>{children}</div>
+      <div className="h-full flex-1 overflow-y-auto">{children}</div>
     </div>
   );
 }
