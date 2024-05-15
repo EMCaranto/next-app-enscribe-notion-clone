@@ -32,7 +32,9 @@ export const Navbar = () => {
         {isAuthenticated && !isLoading && (
           <>
             <Button size={'sm'} variant={'outline'}>
-              <Link href={'/documents'}>Enter Enscribe</Link>
+              <Link href={'/documents'}>
+                <span>Enter Enscribe</span>
+              </Link>
             </Button>
             <UserButton />
           </>
@@ -41,12 +43,12 @@ export const Navbar = () => {
           <>
             <SignInButton mode={'modal'}>
               <Button size={'sm'} variant={'outline'}>
-                Log in
+                <span>Log in</span>
               </Button>
             </SignInButton>
             <SignUpButton mode={'modal'}>
               <Button size={'sm'} variant={'default'}>
-                Join Enscribe
+                <span>Join Enscribe</span>
               </Button>
             </SignUpButton>
           </>
