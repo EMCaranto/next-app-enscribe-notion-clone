@@ -7,6 +7,7 @@ import { SignUpButton } from '@clerk/clerk-react';
 import { useConvexAuth } from 'convex/react';
 import { ArrowRightIcon } from 'lucide-react';
 
+import { LoadingSpinner } from '@/components/shared/loading-spinner';
 import { Button } from '@/components/ui/button';
 
 export const Heading = () => {
@@ -23,8 +24,12 @@ export const Heading = () => {
       <h3 className="px-4 text-base font-medium sm:text-lg md:px-24 md:py-4 md:text-xl lg:text-2xl">
         Enscribe is the connected workspace where better, faster work happens
       </h3>
-      <div>
-        {isLoading && 'Loading...'}
+      <div className="flex w-full items-center justify-center">
+        {isLoading && (
+          <Button>
+            <LoadingSpinner />
+          </Button>
+        )}
         {isAuthenticated && !isLoading && (
           <Button asChild>
             <Link href={'/documents'}>

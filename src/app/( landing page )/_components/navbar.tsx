@@ -7,6 +7,7 @@ import { SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 import { useConvexAuth } from 'convex/react';
 
 import { Logo } from './logo';
+import { LoadingSpinner } from '@/components/shared/loading-spinner';
 import { ThemeToggler } from '@/components/shared/theme-toggler';
 import { Button } from '@/components/ui/button';
 
@@ -27,8 +28,8 @@ export const Navbar = () => {
       )}
     >
       <Logo />
-      <div className="flex w-full items-center justify-between gap-x-2 md:ml-auto md:justify-end">
-        {isLoading && 'Loading...'}
+      <div className="flex w-full items-center justify-between gap-x-4 md:ml-auto md:justify-end">
+        {isLoading && <LoadingSpinner />}
         {isAuthenticated && !isLoading && (
           <>
             <Button size={'sm'} variant={'outline'}>
