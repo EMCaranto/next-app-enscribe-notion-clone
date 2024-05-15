@@ -5,8 +5,8 @@ import type { Metadata } from 'next';
 import { ConvexClientProvider } from '@/providers/convex-provider';
 import { ThemeProvider } from '@/providers/theme-provider';
 
-import '@/stylesheets/main.css';
 import '@/stylesheets/globals.css';
+import '@/stylesheets/main.css';
 
 const app_font = Inter({
   subsets: ['latin'],
