@@ -1,12 +1,17 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 
+import { SignUpButton } from '@clerk/clerk-react';
+import { useConvexAuth } from 'convex/react';
 import { ArrowRightIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 
 export const Heading = () => {
+  const { isAuthenticated, isLoading } = useConvexAuth();
+
   return (
     <div className="max-w-3xl space-y-4 py-4">
       <h1 className="text-3xl font-bold sm:text-4xl md:text-5xl lg:text-6xl">
@@ -19,10 +24,23 @@ export const Heading = () => {
         Enscribe is the connected workspace where better, faster work happens
       </h3>
       <div>
-        <Button>
-          <span>Enter Enscribe</span>
-          <ArrowRightIcon className="ml-2 h-4 w-4" />
-        </Button>
+        {isLoading && 'Loading...'}
+        {isAuthenticated && !isLoading && (
+          <Button asChild>
+            <Link href={'/documents'}>
+              <span>Enter Enscribe</span>
+              <ArrowRightIcon className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        )}
+        {!isAuthenticated && !isLoading && (
+          <SignUpButton mode={'modal'}>
+            <Button>
+              <span>Get Enscribe</span>
+              <ArrowRightIcon className="ml-2 h-4 w-4" />
+            </Button>
+          </SignUpButton>
+        )}
       </div>
     </div>
   );
