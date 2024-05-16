@@ -198,3 +198,32 @@ export const deleteDocument = mutation({
     return document;
   },
 });
+
+export const removeCoverImage = mutation({
+  args: { id: v.id('documents') },
+  handler: async (ctx, args) => {
+    const user = await ctx.auth.getUserIdentity();
+
+    if (!user) {
+      throw new Error('[Remove Cover Image] - Unauthenticated');
+    }
+
+    const userId = user.subject;
+
+    const existingDocument = await ctx.db.get(args.id);
+
+    if (!existingDocument) {
+      throw new Error('[Remove Cover Image] - Existing document not found');
+    }
+
+    if (existingDocument.user_id !== userId) {
+      throw new Error('[Remove Cover Image] - Unauthorized');
+    }
+
+    const document = await ctx.db.patch(args.id, {
+      cover_image: undefined,
+    });
+
+    return document;
+  },
+});
