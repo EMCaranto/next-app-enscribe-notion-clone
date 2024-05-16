@@ -4,6 +4,8 @@ import { useParams, usePathname, useRouter } from 'next/navigation';
 import { PanelLeftCloseIcon, PanelLeftOpenIcon } from 'lucide-react';
 import { useMediaQuery } from 'usehooks-ts';
 
+import { UserSettings } from './user-setting';
+
 import { cn } from '@/lib/utils';
 
 export const Sidebar = () => {
@@ -46,10 +48,7 @@ export const Sidebar = () => {
     if (sidebarRef.current && navbarRef.current) {
       sidebarRef.current.style.width = `${newWidth}px`;
       navbarRef.current.style.setProperty('left', `${newWidth}px`);
-      navbarRef.current.style.setProperty(
-        'width',
-        `calc(100% - ${newWidth}px)`
-      );
+      navbarRef.current.style.setProperty('width', `calc(100%-${newWidth}px)`);
     }
   };
 
@@ -80,7 +79,7 @@ export const Sidebar = () => {
       navbarRef.current.style.setProperty('left', isMobile ? '100%' : '240px');
       navbarRef.current.style.setProperty(
         'width',
-        isMobile ? '0' : 'calc(100% - 240px)'
+        isMobile ? '0' : 'calc(100%-240px)'
       );
 
       setTimeout(() => setIsResetting(false), 300);
@@ -102,9 +101,9 @@ export const Sidebar = () => {
     <>
       <div
         className={cn(
-          'group/sidebar relative z-[99999] flex h-full w-[240px] flex-col overflow-y-auto bg-green-300',
+          'group/sidebar relative z-[50] flex h-full w-[240px] flex-col overflow-y-auto bg-neutral-50 dark:bg-neutral-950',
           isResetting && 'transition-all duration-300 ease-in-out',
-          isMobile && 'w-0'
+          isMobile && 'w-[0px]'
         )}
         ref={sidebarRef}
       >
@@ -118,6 +117,10 @@ export const Sidebar = () => {
         >
           <PanelLeftCloseIcon size={24} />
         </div>
+        <div>
+          <UserSettings />
+        </div>
+        <div>Document Item</div>
         <div
           className="absolute right-0 top-0 h-full w-1 cursor-ew-resize bg-primary/10 opacity-0 transition group-hover/sidebar:opacity-100"
           onClick={onResetWidthHandler}
