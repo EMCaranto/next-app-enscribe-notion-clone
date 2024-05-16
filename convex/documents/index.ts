@@ -171,3 +171,30 @@ export const archiveDocument = mutation({
     return document;
   },
 });
+
+export const deleteDocument = mutation({
+  args: { id: v.id('documents') },
+  handler: async (ctx, args) => {
+    const user = await ctx.auth.getUserIdentity();
+
+    if (!user) {
+      throw new Error('[Delete Document] - Unauthenticated');
+    }
+
+    const userId = user.subject;
+
+    const existingDocument = await ctx.db.get(args.id);
+
+    if (!existingDocument) {
+      throw new Error('[Delete Document] - Existing document not found');
+    }
+
+    if (existingDocument.user_id !== userId) {
+      throw new Error('[Delete Document] - Unauthorized');
+    }
+
+    const document = await ctx.db.delete(args.id);
+
+    return document;
+  },
+});
