@@ -49,3 +49,32 @@ export const getArchivedDocument = query({
     return document;
   },
 });
+
+export const getDocumentById = query({
+  args: { documentId: v.id('documents') },
+  handler: async (ctx, args) => {
+    const user = await ctx.auth.getUserIdentity();
+
+    const document = await ctx.db.get(args.documentId);
+
+    if (!document) {
+      throw new Error('[Get Document By Id] - Document not found');
+    }
+
+    if (document.is_published && !document.is_archived) {
+      return document;
+    }
+
+    if (!user) {
+      throw new Error('[Get Document By Id] - Unauthenticated');
+    }
+
+    const userId = user.subject;
+
+    if (document.user_id !== userId) {
+      throw new Error('[Get Document By Id] - Unauthorized');
+    }
+
+    return document;
+  },
+});
