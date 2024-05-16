@@ -79,7 +79,6 @@ export const getDocumentById = query({
   },
 });
 
-
 export const getSearchDocument = query({
   handler: async (ctx) => {
     const user = await ctx.auth.getUserIdentity();
@@ -98,5 +97,29 @@ export const getSearchDocument = query({
       .collect();
 
     return document;
+  },
+});
+
+export const getSidebarDocument = query({
+  args: {
+    parentDocument: v.optional(v.id('documents')),
+  },
+  handler: async (ctx, args) => {
+    const user = await ctx.auth.getUserIdentity();
+
+    if (!user) {
+      throw new Error('[Get Sidebar Document] - Unauthenticated');
+    }
+
+    const userId = user.subject;
+
+    const document = await ctx.db
+      .query('documents')
+      .withIndex('by_user_parent', (q) =>
+        q.eq('user_id', userId).eq('parent_document', args.parentDocument)
+      )
+      .filter((q) => q.eq(q.field('is_archived'), false))
+      .order('desc')
+      .collect();
   },
 });
