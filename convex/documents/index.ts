@@ -78,3 +78,25 @@ export const getDocumentById = query({
     return document;
   },
 });
+
+
+export const getSearchDocument = query({
+  handler: async (ctx) => {
+    const user = await ctx.auth.getUserIdentity();
+
+    if (!user) {
+      throw new Error('[Get Search Document] - Unauthenticated');
+    }
+
+    const userId = user.subject;
+
+    const document = await ctx.db
+      .query('documents')
+      .withIndex('by_user', (q) => q.eq('user_id', userId))
+      .filter((q) => q.eq(q.field('is_archived'), false))
+      .order('desc')
+      .collect();
+
+    return document;
+  },
+});
