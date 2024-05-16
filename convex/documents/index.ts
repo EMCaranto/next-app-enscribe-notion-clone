@@ -314,3 +314,41 @@ export const restoreDocument = mutation({
     return document;
   },
 });
+
+export const updateDocument = mutation({
+  args: {
+    id: v.id('documents'),
+    title: v.optional(v.string()),
+    icon: v.optional(v.string()),
+    cover_image: v.optional(v.string()),
+    content: v.optional(v.string()),
+    is_published: v.optional(v.boolean()),
+  },
+  handler: async (ctx, args) => {
+    const user = await ctx.auth.getUserIdentity();
+
+    if (!user) {
+      throw new Error('[Update Document] - Unauthenticated');
+    }
+
+    const userId = user.subject;
+
+    const { id, ...rest } = args;
+
+    const existingDocument = await ctx.db.get(args.id);
+
+    if (!existingDocument) {
+      throw new Error('[Update Document] - Existing document not found');
+    }
+
+    if (existingDocument.user_id !== userId) {
+      throw new Error('Unauthorized');
+    }
+
+    const document = await ctx.db.patch(args.id, {
+      ...rest,
+    });
+
+    return document;
+  },
+});
