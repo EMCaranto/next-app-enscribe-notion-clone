@@ -14,6 +14,7 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as documents_index from "../documents/index.js";
 import type * as schema_index from "../schema/index.js";
 
 /**
@@ -25,6 +26,7 @@ import type * as schema_index from "../schema/index.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  "documents/index": typeof documents_index;
   "schema/index": typeof schema_index;
 }>;
 export declare const api: FilterApi<
