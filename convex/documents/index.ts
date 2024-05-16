@@ -123,3 +123,51 @@ export const getSidebarDocument = query({
       .collect();
   },
 });
+
+export const archiveDocument = mutation({
+  args: { id: v.id('documents') },
+  handler: async (ctx, args) => {
+    const user = await ctx.auth.getUserIdentity();
+
+    if (!user) {
+      throw new Error('[Archive Document] - Unauthenticated');
+    }
+
+    const userId = user.subject;
+
+    const existingDocument = await ctx.db.get(args.id);
+
+    if (!existingDocument) {
+      throw new Error('[Archive Document] - Existing document not found');
+    }
+
+    if (existingDocument.user_id !== userId) {
+      throw new Error('[Archive Document] - Unauthorized');
+    }
+
+    const recursiveArchive = async (documentId: Id<'documents'>) => {
+      const childDocument = await ctx.db
+        .query('documents')
+        .withIndex('by_user_parent', (q) =>
+          q.eq('user_id', userId).eq('parent_document', documentId)
+        )
+        .collect();
+
+      for (const child of childDocument) {
+        await ctx.db.patch(child._id, {
+          is_archived: true,
+        });
+
+        await recursiveArchive(child._id);
+      }
+    };
+
+    const document = await ctx.db.patch(args.id, {
+      is_archived: true,
+    });
+
+    recursiveArchive(args.id);
+
+    return document;
+  },
+});
