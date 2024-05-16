@@ -256,3 +256,61 @@ export const removeIcon = mutation({
     return document;
   },
 });
+
+export const restoreDocument = mutation({
+  args: { id: v.id('documents') },
+  handler: async (ctx, args) => {
+    const user = await ctx.auth.getUserIdentity();
+
+    if (!user) {
+      throw new Error('[Restore Document] - Unauthenticated');
+    }
+
+    const userId = user.subject;
+
+    const existingDocument = await ctx.db.get(args.id);
+
+    const options: Partial<Doc<'documents'>> = {
+      is_archived: false,
+    };
+
+    if (!existingDocument) {
+      throw new Error('[Restore Document] - Existing document not found');
+    }
+
+    if (existingDocument.user_id !== userId) {
+      throw new Error('[Restore Document] - Unauthorized');
+    }
+
+    if (existingDocument.parent_document) {
+      const parentDocument = await ctx.db.get(existingDocument.parent_document);
+
+      if (parentDocument?.is_archived) {
+        options.parent_document = undefined;
+      }
+    }
+
+    const recursiveRestore = async (documentId: Id<'documents'>) => {
+      const childDocument = await ctx.db
+        .query('documents')
+        .withIndex('by_user_parent', (q) =>
+          q.eq('user_id', userId).eq('parent_document', documentId)
+        )
+        .collect();
+
+      for (const child of childDocument) {
+        await ctx.db.patch(child._id, {
+          is_archived: false,
+        });
+
+        await recursiveRestore(child._id);
+      }
+    };
+
+    const document = await ctx.db.patch(args.id, options);
+
+    recursiveRestore(args.id);
+
+    return document;
+  },
+});
