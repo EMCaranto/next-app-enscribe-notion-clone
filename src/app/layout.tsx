@@ -2,6 +2,8 @@ import { Inter } from 'next/font/google';
 
 import type { Metadata } from 'next';
 
+import { Toaster } from '@/components/ui/sonner';
+
 import { ConvexClientProvider } from '@/providers/convex-provider';
 import { ThemeProvider } from '@/providers/theme-provider';
 
@@ -42,6 +44,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <body className={app_font.className}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>
