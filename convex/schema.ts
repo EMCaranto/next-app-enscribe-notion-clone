@@ -1,18 +1,17 @@
-// Convex
 import { defineSchema, defineTable } from 'convex/server';
 import { v } from 'convex/values';
 
 export default defineSchema({
   documents: defineTable({
+    user_id: v.string(),
     title: v.string(),
-    userId: v.string(),
     icon: v.optional(v.string()),
-    coverImage: v.optional(v.string()),
+    cover_image: v.optional(v.string()),
     content: v.optional(v.string()),
-    parentDocument: v.optional(v.id('documents')),
-    isPublished: v.boolean(),
-    isArchived: v.boolean(),
+    parent_document: v.optional(v.id('documents')),
+    is_archived: v.boolean(),
+    is_published: v.boolean(),
   })
-    .index('by_user', ['userId'])
-    .index('by_user_parent', ['userId', 'parentDocument']),
+    .index('by_user', ['user_id'])
+    .index('by_user_parent', ['user_id', 'parent_document']),
 });
