@@ -4,6 +4,8 @@ import type { Metadata } from 'next';
 
 import { Toaster } from '@/components/ui/sonner';
 
+import { EdgeStoreProvider } from '@/lib/edgestore';
+
 import { ConvexClientProvider } from '@/providers/convex-provider';
 import { ThemeProvider } from '@/providers/theme-provider';
 
@@ -42,10 +44,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <ConvexClientProvider>
       <html lang="en" suppressHydrationWarning>
         <body className={app_font.className}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            {children}
-            <Toaster />
-          </ThemeProvider>
+          <EdgeStoreProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              {children}
+              <Toaster />
+            </ThemeProvider>
+          </EdgeStoreProvider>
         </body>
       </html>
     </ConvexClientProvider>
