@@ -20,8 +20,8 @@ const variants = {
 
 type InputProps = {
   className?: string;
-  height: number;
-  width: number;
+  height?: number;
+  width?: number;
   disabled?: boolean;
   value?: File | string;
   onChange?: (file?: File) => void | Promise<void>;
