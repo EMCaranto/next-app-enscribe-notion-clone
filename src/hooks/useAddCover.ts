@@ -8,7 +8,7 @@ type AddCoverStore = {
   onReplace: (url: string) => void;
 };
 
-export const useAddCover = create<AddCoverStore>((set) => ({
+export const useAddCoverImage = create<AddCoverStore>((set) => ({
   url: undefined,
   isOpen: false,
   onOpen: () => set({ isOpen: true, url: undefined }),
