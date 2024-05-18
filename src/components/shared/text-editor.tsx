@@ -9,7 +9,7 @@ import { useTheme } from 'next-themes';
 
 import { useEdgeStore } from '@/lib/edgestore';
 
-import '@blocknote/core/style.css';
+import '@blocknote/react/style.css';
 
 interface TextEditorProps {
   editable?: boolean;
@@ -47,7 +47,7 @@ export const TextEditor = ({
         editor={editor}
         theme={resolvedTheme === 'dark' ? 'dark' : 'light'}
         editable={editable}
-        onChange={() => JSON.stringify(editor.topLevelBlocks, null, 2)}
+        onChange={() => onChange(JSON.stringify(editor.document, null, 2))}
       />
     </div>
   );
