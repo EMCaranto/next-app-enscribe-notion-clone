@@ -1,5 +1,4 @@
 import { Inter } from 'next/font/google';
-
 import type { Metadata } from 'next';
 
 import { Toaster } from '@/components/ui/sonner';
@@ -7,6 +6,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { EdgeStoreProvider } from '@/lib/edgestore';
 
 import { ConvexClientProvider } from '@/providers/convex-provider';
+import { ModalProvider } from '@/providers/modal-provider';
 import { ThemeProvider } from '@/providers/theme-provider';
 
 import '@/stylesheets/globals.css';
@@ -41,17 +41,24 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <ConvexClientProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body className={app_font.className}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={app_font.className}>
+        <ConvexClientProvider>
           <EdgeStoreProvider>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              disableTransitionOnChange
+              enableSystem
+              storageKey="enscribe-theme"
+            >
               {children}
+              <ModalProvider />
               <Toaster />
             </ThemeProvider>
           </EdgeStoreProvider>
-        </body>
-      </html>
-    </ConvexClientProvider>
+        </ConvexClientProvider>
+      </body>
+    </html>
   );
 }
