@@ -17,7 +17,7 @@ export const Heading = () => {
     <div className="max-w-3xl space-y-4 py-4">
       <h1 className="text-4xl font-bold md:text-5xl lg:text-6xl">
         <span className="leading-tight">
-          Your Ideasm Documents, & Plans. Unified. Welcome to{' '}
+          Your Ideas, Documents, & Plans. Unified. Welcome to{' '}
           <span className="underline underline-offset-8">Enscribe</span>
         </span>
       </h1>
