@@ -14,14 +14,16 @@ export const SettingModal = () => {
   return (
     <Dialog open={settings.isOpen} onOpenChange={settings.onClose}>
       <DialogContent>
-        <DialogHeader className="border-b pb-3">
+        <DialogHeader className="border-b pb-4">
           <h2 className="text-lg font-medium">Settings</h2>
         </DialogHeader>
         <div className="flex items-center justify-between">
-          <div className="flex flex-col space-y-1">
-            <Label>Appearance</Label>
-            <span className="text-sm text-muted-foreground">
-              Customize how Enscribe looks on your device
+          <div className="flex flex-col space-y-2">
+            <Label className="text-xs font-semibold md:text-sm">
+              Change Theme
+            </Label>
+            <span className="text-xs text-muted-foreground md:text-sm">
+              Adjust the appearance of Enscribe
             </span>
           </div>
           <ThemeToggler />

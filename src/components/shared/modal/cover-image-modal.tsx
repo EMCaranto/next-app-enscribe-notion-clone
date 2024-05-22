@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { useParams } from 'next/navigation';
 
@@ -15,7 +17,7 @@ import { Id } from '../../../../convex/_generated/dataModel';
 
 export const CoverImageModal = () => {
   const [file, setFile] = useState<File>();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const { edgestore } = useEdgeStore();
 
@@ -23,18 +25,18 @@ export const CoverImageModal = () => {
 
   const addCoverImage = useAddCoverImage();
 
-  const onUpdateDoc = useMutation(api.documents.onUpdateDocument);
+  const updateDocument = useMutation(api.documents.onUpdateDocument);
 
   const onCloseHandler = () => {
     setFile(undefined);
-    setIsSubmitting(false);
+    setSubmitting(false);
     addCoverImage.onClose();
   };
 
   const onChangeHandler = async (file?: File) => {
     if (file) {
-      setIsSubmitting(true);
       setFile(file);
+      setSubmitting(true);
 
       const res = await edgestore.publicFiles.upload({
         file,
@@ -43,9 +45,9 @@ export const CoverImageModal = () => {
         },
       });
 
-      await onUpdateDoc({
+      await updateDocument({
         id: params.documentId as Id<'documents'>,
-        coverImage: res.url,
+        cover_image: res.url,
       });
 
       onCloseHandler();
@@ -56,12 +58,13 @@ export const CoverImageModal = () => {
     <Dialog open={addCoverImage.isOpen} onOpenChange={addCoverImage.onClose}>
       <DialogContent>
         <DialogHeader>
-          <h2 className="text-center text-lg font-semibold">Cover Image</h2>
+          <span className="text-center text-sm font-semibold md:text-lg">
+            Cover Image
+          </span>
         </DialogHeader>
         <SingleImageDropzone
-          className="w-full outline-none"
           value={file}
-          disabled={isSubmitting}
+          disabled={submitting}
           onChange={onChangeHandler}
         />
       </DialogContent>
