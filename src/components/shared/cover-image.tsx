@@ -5,18 +5,18 @@ import Image from 'next/image';
 import { useParams } from 'next/navigation';
 
 import { useMutation } from 'convex/react';
-import { ImageIcon, XCircleIcon } from 'lucide-react';
+import { ImageIcon, XIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-
-import { api } from '../../../convex/_generated/api';
-import { Id } from '../../../convex/_generated/dataModel';
 
 import { useAddCoverImage } from '@/hooks/useAddCover';
 
 import { useEdgeStore } from '@/lib/edgestore';
 import { cn } from '@/lib/utils';
+
+import { api } from '../../../convex/_generated/api';
+import { Id } from '../../../convex/_generated/dataModel';
 
 interface CoverImageProps {
   url?: string;
@@ -26,9 +26,9 @@ interface CoverImageProps {
 export const CoverImage = ({ url, preview }: CoverImageProps) => {
   const { edgestore } = useEdgeStore();
 
-  const addCoverImage = useAddCoverImage();
-
   const params = useParams();
+
+  const addCoverImage = useAddCoverImage();
 
   const removeCoverImage = useMutation(api.documents.onRemoveCoverImage);
 
@@ -47,34 +47,38 @@ export const CoverImage = ({ url, preview }: CoverImageProps) => {
   return (
     <div
       className={cn(
-        'group relative h-[35vh] w-full',
-        !url && 'h-[12vh]',
+        'group relative h-[33.33vh] w-full',
+        !url && 'h-[16.66vh]',
         url && 'bg-muted'
       )}
     >
       {!!url && (
-        <div>
-          <Image className="object-cover" src={url} alt="cover-image" fill />
-        </div>
+        <Image
+          className="object-cover"
+          src={url}
+          alt="cover-img"
+          fill
+          priority
+        />
       )}
       {url && !preview && (
-        <div className="absolute bottom-5 right-5 flex items-center gap-x-2 opacity-0 group-hover:opacity-100">
+        <div className="absolute bottom-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 md:flex-row">
           <Button
-            className="gap-x-2 text-xs text-muted-foreground"
+            className="gap-x-[4px] text-xs text-muted-foreground"
             size={'sm'}
-            variant={'outline'}
+            variant={'ghost'}
             onClick={() => addCoverImage.onReplace(url)}
           >
             <ImageIcon size={16} />
             <span>Change Cover</span>
           </Button>
           <Button
-            className="gap-x-2 text-xs text-muted-foreground"
+            className="gap-x-[4px] text-xs text-muted-foreground"
             size={'sm'}
-            variant={'outline'}
+            variant={'ghost'}
             onClick={onRemoveCoverImageHandler}
           >
-            <XCircleIcon size={16} />
+            <XIcon size={16} />
             <span>Remove Cover</span>
           </Button>
         </div>
@@ -84,5 +88,5 @@ export const CoverImage = ({ url, preview }: CoverImageProps) => {
 };
 
 CoverImage.Skeleton = function CoverImageSkeleton() {
-  return <Skeleton className="h-[12vh] w-full" />;
+  return <Skeleton className="h-[16.66vh] w-full" />;
 };
