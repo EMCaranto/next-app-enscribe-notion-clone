@@ -31,23 +31,10 @@ export const SearchCommand = () => {
 
   const isOpen = useSearch((store) => store.isOpen);
   const onClose = useSearch((store) => store.onClose);
-  const toggle = useSearch((store) => store.toggle);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
-
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (
-        event.key.toLowerCase() === 'k' ||
-        (('K' || 'k') && (event.metaKey || event.ctrlKey))
-      ) {
-        event.preventDefault();
-        toggle();
-      }
-    };
-  }, [toggle]);
 
   if (!isMounted) {
     return null;
@@ -60,27 +47,27 @@ export const SearchCommand = () => {
 
   return (
     <CommandDialog open={isOpen} onOpenChange={onClose}>
-      <CommandInput placeholder={`Search ${user?.firstName}'s Enscribe`} />
-      <CommandList>
+      <CommandInput placeholder={`Search on ${user?.firstName}'s Enscribe`} />
+      <CommandList className="py-2">
         <CommandEmpty>
-          <span className="text-muted-foreground">No result found</span>
+          <span className="text-xs text-muted-foreground">No result found</span>
         </CommandEmpty>
-        <CommandGroup heading={'Documents'}>
-          <div>
+        <CommandGroup heading={''}>
+          <div className="space-y-[4px]">
             {searchDocument?.map((document) => (
               <CommandItem
-                className="gap-x-2"
+                className="flex h-full w-full items-center justify-start gap-x-2"
                 key={document._id}
                 title={document.title}
-                value={document.title}
+                value={document._id}
                 onSelect={onSelectHandler}
               >
                 {document.icon ? (
-                  <span className="text-lg">{document.icon}</span>
+                  <span>{document.icon}</span>
                 ) : (
-                  <FileIcon size={16} />
+                  <FileIcon size={24} />
                 )}
-                <span>{document.title}</span>
+                <span className="text-sm font-medium">{document.title}</span>
               </CommandItem>
             ))}
           </div>
