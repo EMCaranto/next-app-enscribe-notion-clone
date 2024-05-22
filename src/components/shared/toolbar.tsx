@@ -21,7 +21,7 @@ interface ToolbarProps {
 
 export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
   const [title, setTitle] = useState(initialData.title);
-  const [isEditing, setIsEditing] = useState(false);
+  const [editing, setEditing] = useState(false);
 
   const inputRef = useRef<ElementRef<'textarea'>>(null);
 
@@ -33,7 +33,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
   const enableInput = () => {
     if (preview) return;
 
-    setIsEditing(true);
+    setEditing(true);
 
     setTimeout(() => {
       setTitle(initialData.title);
@@ -42,7 +42,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
   };
 
   const disableInput = () => {
-    setIsEditing(false);
+    setEditing(false);
   };
 
   const onIconSelectHandler = (icon: string) => {
@@ -77,9 +77,9 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
   };
 
   return (
-    <div className="group relative pl-14">
+    <div className="group relative">
       {!!initialData.icon && !preview && (
-        <div className="group/icon flex items-center gap-x-2 pt-6">
+        <div className="group/icon mt-4 flex items-center gap-x-2 pt-4 md:mt-[20px]">
           <IconPicker onChange={onIconSelectHandler}>
             <p className="text-6xl transition hover:opacity-75">
               {initialData.icon}
@@ -96,9 +96,9 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
         </div>
       )}
       {!!initialData.icon && preview && (
-        <p className="pt-6 text-6xl">{initialData.icon}</p>
+        <p className="pt-4 text-6xl">{initialData.icon}</p>
       )}
-      <div className="flex items-center gap-x-1 py-4 opacity-0 group-hover:opacity-100">
+      <div className="flex items-center gap-x-2 py-4 opacity-0 group-hover:opacity-100">
         {!initialData.icon && !preview && (
           <IconPicker onChange={onIconSelectHandler} asChild>
             <Button
@@ -123,9 +123,9 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
           </Button>
         )}
       </div>
-      {isEditing && !preview ? (
+      {editing && !preview ? (
         <TextareaAutosize
-          className="resize-none break-words bg-transparent text-5xl font-bold text-neutral-700 outline-none dark:text-neutral-300"
+          className="resize-none break-words text-5xl font-bold outline-none"
           ref={inputRef}
           value={title}
           onBlur={disableInput}
@@ -134,7 +134,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
         />
       ) : (
         <div
-          className="break-words pb-3 text-5xl font-bold text-neutral-700 outline-none dark:text-neutral-300"
+          className="break-words pb-4 text-5xl font-bold outline-none"
           onClick={enableInput}
         >
           <span>{initialData.title}</span>
