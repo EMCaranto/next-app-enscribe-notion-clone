@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import EmojiPicker, { Theme } from 'emoji-picker-react';
+import EmojiPicker, { EmojiStyle, Theme } from 'emoji-picker-react';
 import { useTheme } from 'next-themes';
 
 import {
@@ -24,21 +24,26 @@ export const IconPicker = ({
 }: IconPickerProps) => {
   const { resolvedTheme } = useTheme();
 
-  const themeModeMap = {
-    light: Theme.LIGHT,
+  const themeModes = {
     dark: Theme.DARK,
+    light: Theme.LIGHT,
+    auto: Theme.AUTO,
   };
 
-  const theme = (resolvedTheme || 'light') as keyof typeof themeModeMap;
+  const theme = (resolvedTheme || 'auto') as keyof typeof themeModes;
 
-  const currentTheme = themeModeMap[theme];
+  const currentTheme = themeModes[theme];
 
   return (
     <Popover>
       <PopoverTrigger asChild={asChild}>{children}</PopoverTrigger>
-      <PopoverContent className="w-full border-none p-0 shadow-none">
+      <PopoverContent className="w-full rounded-xl p-[4px]">
         <EmojiPicker
+          className="emoji-size text-sm"
+          emojiStyle={EmojiStyle.TWITTER}
+          emojiVersion={'5.0'}
           height={350}
+          previewConfig={{ showPreview: false }}
           theme={currentTheme}
           onEmojiClick={(data) => onChange(data.emoji)}
         />
