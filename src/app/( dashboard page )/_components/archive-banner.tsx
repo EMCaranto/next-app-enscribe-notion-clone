@@ -38,7 +38,7 @@ export const ArchiveBanner = ({ documentId }: ArchiveBannerProps) => {
     toast.promise(promise, {
       loading: 'Restoring note',
       success: 'Note restored!',
-      error: 'Failed to restored note',
+      error: 'Failed to restore note',
     });
   };
 
