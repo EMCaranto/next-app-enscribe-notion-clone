@@ -18,6 +18,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 import { api } from '../../../../convex/_generated/api';
 import { Id } from '../../../../convex/_generated/dataModel';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
 
 interface MenuProps {
   documentId: Id<'documents'>;
@@ -55,8 +56,13 @@ export const Menu = ({ documentId }: MenuProps) => {
           Delete
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <div className="p-2 text-xs text-muted-foreground">
-          Last edited by: {user?.fullName}
+        <div className="flex items-center justify-start gap-x-2 p-2 text-muted-foreground">
+          <Avatar className="h-[24px] w-[24px]">
+            <AvatarImage src={user?.imageUrl} />
+          </Avatar>
+          <span className="line-clamp-1 text-xs">
+            Last edited by: {user?.fullName}
+          </span>
         </div>
       </DropdownMenuContent>
     </DropdownMenu>
