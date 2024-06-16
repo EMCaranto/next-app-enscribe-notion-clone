@@ -32,7 +32,7 @@ export const Navbar = () => {
         {isLoading && <LoadingSpinner />}
         {isAuthenticated && !isLoading && (
           <div className="flex gap-x-4">
-            <div className="flex items-center justify-center md:hidden">
+            <div className=" pointer-events-none flex items-center justify-center md:hidden">
               <UserButton />
             </div>
             <Button className="hidden md:block" size={'sm'} variant={'outline'}>
@@ -40,7 +40,7 @@ export const Navbar = () => {
                 <span>Dashboard</span>
               </Link>
             </Button>
-            <div className="hidden items-center justify-center md:flex">
+            <div className="pointer-events-none hidden items-center justify-center md:flex">
               <UserButton />
             </div>
           </div>
