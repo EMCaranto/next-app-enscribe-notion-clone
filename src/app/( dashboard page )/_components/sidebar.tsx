@@ -6,6 +6,7 @@ import { useParams, usePathname, useRouter } from 'next/navigation';
 import { useMutation } from 'convex/react';
 import {
   ArchiveIcon,
+  ChevronsLeftIcon,
   MenuIcon,
   PanelLeftCloseIcon,
   PlusCircleIcon,
@@ -151,7 +152,7 @@ export const Sidebar = () => {
     <>
       <div
         className={cn(
-          'group/sidebar relative z-[50] flex w-[240px] flex-col overflow-hidden bg-secondary ',
+          'group/sidebar relative z-[50] flex w-[240px] flex-col overflow-hidden bg-primary-foreground',
           resetting && 'transition-all duration-300 ease-in-out',
           isMobile && 'w-0'
         )}
@@ -159,13 +160,13 @@ export const Sidebar = () => {
       >
         <div
           className={cn(
-            'absolute right-[14px] top-[14px] z-[50] rounded-sm text-muted-foreground opacity-0 transition hover:bg-transparent group-hover/sidebar:opacity-100 dark:hover:bg-transparent dark:hover:text-primary',
+            'absolute right-[14px] top-[14px] z-[50] rounded text-muted-foreground opacity-0 hover:text-primary group-hover/sidebar:opacity-100',
             isMobile && 'opacity-100'
           )}
           role="button"
           onClick={onCollapseHandler}
         >
-          <PanelLeftCloseIcon size={24} />
+          <ChevronsLeftIcon size={24} />
         </div>
         <div className="flex h-screen flex-col">
           <div className="flex-shrink-0">

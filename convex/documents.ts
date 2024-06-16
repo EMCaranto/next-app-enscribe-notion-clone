@@ -40,7 +40,7 @@ export const getDocumentById = query({
     }
 
     if (!user) {
-      throw new Error('[Get Document By Id] - Unauthenticated');
+      return document;
     }
 
     const userId = user.subject;
@@ -322,9 +322,9 @@ export const onUpdateDocument = mutation({
     id: v.id('documents'),
     title: v.optional(v.string()),
     icon: v.optional(v.string()),
-    coverImage: v.optional(v.string()),
+    cover_image: v.optional(v.string()),
     content: v.optional(v.string()),
-    isPublished: v.optional(v.boolean()),
+    is_published: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     const user = await ctx.auth.getUserIdentity();

@@ -9,18 +9,16 @@ import { CoverImage } from '@/components/shared/cover-image';
 import { Toolbar } from '@/components/shared/toolbar';
 import { Skeleton } from '@/components/ui/skeleton';
 
-import '';
-
 import { api } from '../../../../../../convex/_generated/api';
 import { Id } from '../../../../../../convex/_generated/dataModel';
 
-interface DocumentIdPageProps {
+interface DocumentPageProps {
   params: {
     documentId: Id<'documents'>;
   };
 }
 
-export default function PreviewDocumentPage({ params }: DocumentIdPageProps) {
+export default function DocumentPage({ params }: DocumentPageProps) {
   const Editor = useMemo(
     () =>
       dynamic(
@@ -68,14 +66,15 @@ export default function PreviewDocumentPage({ params }: DocumentIdPageProps) {
     );
   }
 
+  console.log('Document Cover Image: ' + getDocumentId);
+
   return (
     <div className="pb-40">
-      <CoverImage url={getDocumentId.cover_image} preview />
+      <CoverImage url={getDocumentId.cover_image} />
       <div className="mx-auto md:max-w-3xl lg:max-w-4xl">
-        <Toolbar initialData={getDocumentId} preview />
+        <Toolbar initialData={getDocumentId} />
         <Editor
           initialContent={getDocumentId.content}
-          editable={false}
           onChange={onChangeHandler}
         />
       </div>

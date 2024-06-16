@@ -21,7 +21,7 @@ export default function DocumentsPage() {
 
   const router = useRouter();
 
-  const createDoc = useMutation(api.documents.index.createDocument);
+  const createDoc = useMutation(api.documents.onCreateDocument);
 
   const onCreateDocHandler = () => {
     const promise = createDoc({ title: 'Untitled' }).then((documentId) =>

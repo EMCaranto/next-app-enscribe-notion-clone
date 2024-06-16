@@ -25,3 +25,19 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-neutral-950/80 dark:bg-neutral-50/80;
 }
+
+.sidebar-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-track {
+  @apply hidden;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-thumb {
+  @apply rounded bg-transparent opacity-0 transition duration-300 ease-in-out;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-neutral-950/50 opacity-100 transition duration-300 ease-in-out dark:bg-neutral-50/80;
+}

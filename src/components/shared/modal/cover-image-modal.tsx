@@ -58,7 +58,7 @@ export const CoverImageModal = () => {
     <Dialog open={addCoverImage.isOpen} onOpenChange={addCoverImage.onClose}>
       <DialogContent>
         <DialogHeader>
-          <span className="text-center text-sm font-semibold md:text-lg">
+          <span className="text-center text-xs font-semibold md:text-sm">
             Cover Image
           </span>
         </DialogHeader>
