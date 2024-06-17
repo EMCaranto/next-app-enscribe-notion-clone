@@ -1,7 +1,5 @@
 # Enscribe - A Full Stack Notion Clone Application
 
----
-
 ## Demo Link:
 
 - You can explore my site by visitting **[Enscribe](https://enscribe.vercel.app/)**.
