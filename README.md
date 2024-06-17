@@ -10,8 +10,6 @@
   - Email: enscribe_dummy@email.com
   - Password: enscribe_dummy
 
-<hr style="border: 0; height: 1px; background-color: #d4d4d4;">
-
 ## Table of Contents:
 
 1. [About Enscribe](#about-enscribe)
@@ -22,19 +20,13 @@
 6. [Credits](#credits)
 7. [License](#license)
 
-<hr style="border: 0; height: 1px; background-color: #d4d4d4;">
-
 ## About Enscribe
 
 Enscribe is an end-to-end fullstack Notion clone that offers a comprehensive suite of features including a Notion-style editor, cover images, nested documents, the ability to publish documents publicly, and with real-time database functionality and more.
 
-<hr style="border: 0; height: 1px; background-color: #d4d4d4;">
-
 ## Screenshots
 
 Working in progress...
-
-<hr style="border: 0; height: 1px; background-color: #d4d4d4;">
 
 ## Technologies
 
@@ -55,8 +47,6 @@ Here are the technologies used in this project:
 - **[Edgestore](https://edgestore.dev/)** : A data caching and retrieval service for optimizing performance.
 
 - **[BlockNote](https://www.blocknotejs.org/)** : A feature-rich note-taking application.
-
-<hr style="border: 0; height: 1px; background-color: #d4d4d4;">
 
 ## Setup
 
@@ -97,13 +87,9 @@ Here are the technologies used in this project:
 
 The project should now be running locally, and you can access it in your browser at http://localhost:3000 (or another specified port if applicable).
 
-<hr style="border: 0; height: 1px; background-color: #d4d4d4;">
-
 ## Status
 
 **Enscribe** is currently under development, although it is fully functional. I plan to update the UI soon and introduce additional features beyond basic editing and sharing capabilities, including real-time collaboration. Furthermore, I will focus on enhancing and resolving any minor bugs in the system.
-
-<hr style="border: 0; height: 1px; background-color: #d4d4d4;">
 
 ## Credits
 
@@ -111,8 +97,6 @@ List of contributors:
 
 - **[EMCaranto](https://github.com/EMCaranto)**
 - **[Code With Antionio](https://www.codewithantonio.com/)** and their engaging and helpful community on **[Discord]()**.
-
-<hr style="border: 0; height: 1px; background-color: #d4d4d4;">
 
 ## License
 
